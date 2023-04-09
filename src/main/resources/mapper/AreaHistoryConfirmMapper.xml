@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.covids.mapper.AreaHistoryConfirmMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiao.covids.entity.AreaHistoryConfirm">
+        <result column="yeardate" property="yeardate" />
+        <result column="西藏" property="西藏" />
+        <result column="澳门" property="澳门" />
+        <result column="青海" property="青海" />
+        <result column="台湾" property="台湾" />
+        <result column="香港" property="香港" />
+        <result column="贵州" property="贵州" />
+        <result column="吉林" property="吉林" />
+        <result column="新疆" property="新疆" />
+        <result column="宁夏" property="宁夏" />
+        <result column="内蒙古" property="内蒙古" />
+        <result column="甘肃" property="甘肃" />
+        <result column="天津" property="天津" />
+        <result column="山西" property="山西" />
+        <result column="辽宁" property="辽宁" />
+        <result column="黑龙江" property="黑龙江" />
+        <result column="海南" property="海南" />
+        <result column="河北" property="河北" />
+        <result column="陕西" property="陕西" />
+        <result column="云南" property="云南" />
+        <result column="广西" property="广西" />
+        <result column="福建" property="福建" />
+        <result column="上海" property="上海" />
+        <result column="北京" property="北京" />
+        <result column="江苏" property="江苏" />
+        <result column="四川" property="四川" />
+        <result column="山东" property="山东" />
+        <result column="江西" property="江西" />
+        <result column="重庆" property="重庆" />
+        <result column="安徽" property="安徽" />
+        <result column="湖南" property="湖南" />
+        <result column="河南" property="河南" />
+        <result column="广东" property="广东" />
+        <result column="浙江" property="浙江" />
+        <result column="湖北" property="湖北" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.covids.mapper.ChinaTotalMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiao.covids.entity.ChinaTotal">
+        <result column="nowtime" property="nowtime" />
+        <result column="confirm" property="confirm" />
+        <result column="nowConfirm" property="nowConfirm" />
+        <result column="importedCase" property="importedCase" />
+        <result column="dead" property="dead" />
+        <result column="heal" property="heal" />
+        <result column="noInfect" property="noInfect" />
+        <result column="local_acc_confirm" property="localAccConfirm" />
+        <result column="suspect" property="suspect" />
+        <result column="nowSevere" property="nowSevere" />
+        <result column="showLocalConfirm" property="showLocalConfirm" />
+        <result column="showlocalinfeciton" property="showlocalinfeciton" />
+        <result column="noInfectH5" property="noInfectH5" />
+    </resultMap>
+
+</mapper>

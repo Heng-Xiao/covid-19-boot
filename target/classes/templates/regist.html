@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+<title>可视化大屏注册</title>
+<link rel="stylesheet" type="text/css" href="/login/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="/login/css/scanboardLogin.css" />
+<link rel="stylesheet" type="text/css" href="/login/css/animsition.css" />
+</head>
+<body>
+	<div class="wp animsition">
+		<div class="boardLogin">
+			<a href="#" class="logo">
+				<img src="/login/images/loginlogo.png">
+			</a>
+			<form name="Form" method="POST" th:action="@{/regist}">
+				<div class="inpGroup" >
+					<span class="loginIco3"></span>
+					<input id="email" type="text" name="email" placeholder="请输入您的邮箱账号">
+				</div>
+				<br>
+				<div class="inpGroup">
+					<span class="loginIco4"></span>
+					<div style=""><input id="yanzm" type="text" name="yanzm" placeholder="请输入验证码">
+					</div>
+					<div id='sendyanzm' style="right:20px;position:absolute;top:7px;height: 18px">
+						<a  style="color: #ff5000;font-size: 13px">发送验证码</a>
+					</div>
+				</div>
+				<br>
+				<div class="inpGroup">
+					<span class="loginIco1"></span>
+					<input id="name" type="text" name="name" placeholder="请输入您的用户名" >
+				</div>
+				<br>
+				<div class="inpGroup">
+					<span class="loginIco2"></span>
+					<input id="password" type="password" name="password"  placeholder="请输入您的密码">
+				</div>
+				<div class="prompt">
+					<p class="error" th:text="${error}">用户名错误或不存在</p>
+				</div>
+                <button class="submit" >注册并登录</button>
+
+			</form>
+		</div>
+	</div>
+	<div id="particles-js"></div>
+</body>
+<script type="text/javascript" src="/login/js/jquery.min.js"></script>
+<script type="text/javascript" src="/login/js/jquery.animsition.js"></script>
+<script src="/login/js/particles.min.js"></script>
+<script src="/login/js/app.js"></script>
+<script type="text/javascript">
+	$(".animsition").animsition({
+	    inClass               :   'fade-in',
+	    outClass              :   'fade-out',
+	    inDuration            :    800,
+	    outDuration           :    1000,
+	    linkElement           :   '.animsition-link',
+
+	    loading               :    false,
+	    loadingParentElement  :   'body',
+	    loadingClass          :   'animsition-loading',
+	    unSupportCss          : [ 'animation-duration',
+	                              '-webkit-animation-duration',
+	                              '-o-animation-duration'
+	                            ],
+	
+
+	    overlay               :   false,
+	    
+	    overlayClass          :   'animsition-overlay-slide',
+	    overlayParentElement  :   'body'
+  	});
+</script>
+<script>
+	$("#sendyanzm").click(function(){
+		var email = $("#email").val()
+
+		var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+		if(email == ""){
+			console.log("邮箱不能为空!~");
+			$(".error").text("邮箱不能为空!~")
+		}else if(!reg.test(email)){
+			$(".error").text("请填写正确的邮箱格式!~")
+			console.log("请填写正确的邮箱格式!~");
+		}else{
+			$.ajax({
+				type: "POST",
+
+				url: "/sendyanzm",
+				dataType: 'json',
+				data : {
+					"email": email
+				},
+				success: function (e) {
+					console.log(e.error);
+					$(".error").text(e.error)
+				}
+			})
+		}
+
+
+	});
+
+	// $(".submit").click(function(){
+	// 	var email = $("#email").val()
+	// 	var yanzm = $("#yanzm").val()
+	// 	var name = $("#name").val()
+	// 	var password = $("#email").val()
+	// 	var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+	// 	if(email == ""){
+	// 		console.log("邮箱不能为空!~");
+	// 		$(".error").text("邮箱不能为空!~")
+	// 	}else if(!reg.test(email)){
+	// 		$(".error").text("请填写正确的邮箱格式!~")
+	// 		console.log("请填写正确的邮箱格式!~");
+	// 	}else{
+	// 		$.ajax({
+	// 			type: "POST",
+	//
+	// 			url: "/regist",
+	// 			dataType: 'json',
+	// 			data : {
+	// 				"email": email,
+	// 				"yanzm": yanzm,
+	// 				"name": name,
+	// 				"password": password
+	// 			},
+	// 			success: function (e) {
+	// 				console.log(e.error);
+	// 				$(".error").text(e.error)
+	// 			}
+	// 		})
+	// 	}
+	//
+	//
+	// });
+</script>
+</html>

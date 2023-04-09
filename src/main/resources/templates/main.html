@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>国内疫情大数据可视化平台</title>
+    <link rel="stylesheet" href="/css/index.css"/>
+</head>
+<body>
+<!-- 头部 -->
+<header>
+    <h1>国内疫情大数据可视化平台</h1>
+    <a th:href="@{/index}" class="a-access">
+        <button class="button type1">
+            后台管理
+        </button>
+    </a>
+    <div class="show-time"></div>
+    <script>
+        var t = null;
+        t = setTimeout(time, 1000); //开始运行
+        function time() {
+            clearTimeout(t); //清除定时器
+            dt = new Date();
+            var y = dt.getFullYear();
+            var mt = dt.getMonth() + 1;
+            var day = dt.getDate();
+            var h = dt.getHours(); //获取时
+            var m = dt.getMinutes(); //获取分
+            var s = dt.getSeconds(); //获取秒
+            document.querySelector(".show-time").innerHTML ="当前时间：" + y + "年" + mt +
+                "月" + day + "日-" + h + "时" + m + "分" + s + "秒";
+            t = setTimeout(time, 1000); //设定定时器，循环运行
+        }
+    </script>
+</header>
+<!-- 页面主题 -->
+<div id="light" class="white_content">
+    <button href="javascript:void(0)"
+            onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+        关闭本窗口
+    </button>
+    <div id="main" class="main" style="width: 168.45vh;height:75.15vh;left: 0;">
+    </div>
+</div>
+<div id="fade" class="black_overlay"></div>
+<div id="light2" class="white_content">
+    <button href="javascript:void(0)"
+            onclick="document.getElementById('light2').style.display='none';document.getElementById('fade2').style.display='none'">
+        关闭本窗口
+    </button>
+    <button id="education" href="javascript:void(0)">各省感染数量与各省在校学生人数关系</button>
+    <button id="citypopulationrate" href="javascript:void(0)">各省感染数量与各省城镇化率关系</button>
+    <button id="gdp" href="javascript:void(0)">各省感染数量与各省gdp关系</button>
+    <button id="doctor" href="javascript:void(0)">各省卫生水平</button>
+    <div id="main2" class="main2" style="width: 168.45vh;height:75.15vh;left: 0;">
+    </div>
+</div>
+<div id="fade2" class="black_overlay"></div>
+<!-- 页面主体 -->
+<section class="mainbox">
+    <!-- 左侧盒子 -->
+    <div class="column">
+        <div class="panel a7">
+            <h2>最新疫情新闻关键字</h2>
+            <div class="chart"></div>
+            <div class="panel-footer"></div>
+        </div>
+        <div class="panel a2">
+            <h2>近两月新增确诊(本土/境外输入)分布</h2>
+            <div class="chart"></div>
+            <div class="panel-footer"></div>
+        </div>
+        <div class="panel a1">
+            <h2>国内新冠疫情死亡率</h2>
+            <!-- 图表放置盒子 -->
+            <div class="chart"></div>
+            <!-- 伪元素绘制盒子下边角 -->
+            <div class="panel-footer"></div>
+        </div>
+    </div>
+    <!-- 中间盒子 -->
+    <div class="column">
+        <!-- 头部 no模块 -->
+        <div class="no">
+            <div class="no-hd">
+                <ul>
+                    <li th:text="${chinaTotal.confirm}">124</li>
+                    <li th:text="${chinaTotal.nowConfirm}">124</li>
+                    <li th:text="${chinaTotal.importedCase}">214</li>
+                    <li th:text="${chinaTotal.dead}">124</li>
+                </ul>
+            </div>
+            <div class="no-bd">
+                <ul>
+                    <li>累计确诊人数</li>
+                    <li>现存确诊人数</li>
+                    <li>境外输入人数</li>
+                    <li>累计死亡人数</li>
+                </ul>
+            </div>
+        </div>
+        <!-- 地图模块 -->
+        <div class="map">
+            <h2><a href="javascript:;
+                    ">全国累计确诊分布</a>
+                <a href="javascript:void(0)"
+                   onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
+                   ;>境外输入确诊分布</a>
+            </h2>
+            <div class="map1"></div>
+            <div class="map2"></div>
+            <div class="map3"></div>
+            <div class="chart"></div>
+        </div>
+    </div>
+    <!-- 右侧盒子 -->
+    <div class="column">
+
+        <div class="panel bar2">
+            <h2>
+                <a href="javascript:void(0)"
+                   onclick="document.getElementById('light2').style.display='block';document.getElementById('fade2').style.display='block'"
+                   ;>城镇化率与确诊数量关系(点击放大)</a>
+            </h2>
+            <div class="chart"></div>
+            <div class="panel-footer"></div>
+        </div>
+        <div class="panel a3">
+            <h2>风险地区情况</h2>
+            <ul class="tabnav">
+                <li style=" height: auto;">
+                    <div class="gdhead">
+                        <span class="span6">序号</span><span class="span3">风险地区名</span><span class="span4">风险地区程度</span>
+                    </div>
+                    <div class="scrollDiv" style=" height:2.40rem">
+                        <ul class="smjl" >
+                                <li th:each="riskArea,iterStat : ${riskAreas}">
+                                    <span class="span5" th:text="${iterStat.index + 1}"></span>
+                                    <span class="span1" th:text="${riskArea.areasName}"></span>
+                                    <span class="span2" th:if="${riskArea.areasDegree}=='高风险地区'" style="color:rgba(255,0,0,1)">[[${riskArea.areasDegree}]]</span>
+                                    <span class="span2" th:if="${riskArea.areasDegree}=='中风险地区'" style="color: rgba(255,255,0,0.8)">[[${riskArea.areasDegree}]]</span>
+                                </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div class="panel-footer"></div>
+        </div>
+        <div class="panel a5">
+            <h2>各省确诊占比</h2>
+            <div class="chart"></div>
+            <div class="panel-footer"></div>
+        </div>
+    </div>
+</section>
+<input id="websocketUrl" type="hidden" th:value="${deadHeal}" />
+<section class="mainbox">
+    <div class="column">
+        <div class="panel linecountry">
+            <h2><a href="javascript:;
+                    ">全国疫情人数变化曲线</a><a href="javascript:;">全国新增人数堆叠条形图</a></h2>
+            <div class="chart"></div>
+            <div class="panel-footer"></div>
+        </div>
+    </div>
+
+</section>
+<!--<div style="display: flex;justify-content: center;align-items: center;">-->
+<!--    <span style="color:#FFF">Copyright © 2022 快过来看看呀&nbsp;|&nbsp; 备案号&nbsp;:&nbsp;</span>-->
+<!--    <a style="color:#f72b07" href="https://beian.miit.gov.cn/" target="_blank">黔ICP备2022005951号-1</a>-->
+<!--    <span style="color:#FFF"> &nbsp;|&nbsp; </span>-->
+<!--    <a style="color:#FFF"><img src="/img/beian.png"></a>-->
+<!--    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52010302002903" target="_blank" style="color:#f72b07" rel="noopener">贵公网安备 52010302002903号</a>-->
+<!--    <span style="color:#FFF">&nbsp;|&nbsp;本站已安全运行&nbsp;:&nbsp;</span>-->
+<!--    <span id="momk"></span>-->
+<!--    <span style="color:#FFF">&nbsp;&nbsp;座右铭&nbsp;:&nbsp;</span>-->
+<!--    <span style="color:rgba(89,238,242,0.8)">业精于勤，荒于嬉；行成于思，毁于随。</span>-->
+<!--    <span style="color:#FFF">&nbsp;&nbsp;个人QQ&nbsp;:&nbsp;</span>-->
+<!--    <span style="color: rgba(245,114,108,0.8)">xiaohengll</span>-->
+<!--</div>-->
+
+<!--<script language=javascript>-->
+<!--    function show_date_time(){-->
+<!--        window.setTimeout("show_date_time()", 1000);-->
+<!--        BirthDay=new Date("07-19-2022 12:12:24");//建站日期-->
+<!--        today=new Date();-->
+<!--        timeold=(today.getTime()-BirthDay.getTime());-->
+<!--        sectimeold=timeold/1000-->
+<!--        secondsold=Math.floor(sectimeold);-->
+<!--        msPerDay=24*60*60*1000-->
+<!--        e_daysold=timeold/msPerDay-->
+<!--        daysold=Math.floor(e_daysold);-->
+<!--        e_hrsold=(daysold-e_daysold)*-24;-->
+<!--        hrsold=Math.floor(e_hrsold);-->
+<!--        e_minsold=(hrsold-e_hrsold)*-60;-->
+<!--        minsold=Math.floor((hrsold-e_hrsold)*-60);-->
+<!--        seconds=Math.floor((minsold-e_minsold)*-60);-->
+<!--        momk.innerHTML=daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒" ;-->
+<!--    }-->
+<!--    show_date_time();-->
+<!--</script>-->
+<!--<style>-->
+<!--    #momk{animation:change 10s infinite;font-weight:800; }-->
+<!--    @keyframes change{0%{color:#5cb85c;}25%{color:#556bd8;}50%{color:#e40707;}75%{color:#66e616;}100% {color:#67bd31;}}-->
+<!--</style>-->
+<script src="/js/flexible.js"></script>
+<script src="/js/echarts.min.js"></script>
+<script src="/js/jquery.js"></script>
+<!-- 引入china.js 完成地图模块 -->
+<script src="/js/china.js"></script>
+<script src="/js/echarts-wordcloud.js"></script>
+<script src="/login/js/jquery.min.js"></script>
+<script src="/js/jquery.liMarquee.js"></script>
+<script src="/mapjs/allecharts.js"></script>
+<script src="/output/datas.js"></script>
+<script src="/output/index.js"></script>
+<script src="/output/worldZH.js"></script>
+<script type="text/javascript">
+             window.onload = function(){
+                     //屏蔽键盘事件
+                     document.onkeydown = function (){
+                             var e = window.event || arguments[0];
+                             //F12
+                             if(e.keyCode == 123){
+                                    return false;
+                                //Ctrl+Shift+I
+                                 }else if((e.ctrlKey) && (e.shiftKey) && (e.keyCode == 73)){
+                                     return false;
+                                 //Shift+F10
+                                 }else if((e.shiftKey) && (e.keyCode == 121)){
+                                     return false;
+                                 //Ctrl+U
+                                }else if((e.ctrlKey) && (e.keyCode == 85)){
+                                     return false;
+                                 }
+                         };
+                     //屏蔽鼠标右键
+                     document.oncontextmenu = function (){
+                             return false;
+                         }
+                }
+
+</script>
+</body>
+</html>

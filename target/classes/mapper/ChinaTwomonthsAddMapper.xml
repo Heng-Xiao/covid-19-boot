@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.covids.mapper.ChinaTwomonthsAddMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiao.covids.entity.ChinaTwomonthsAdd">
+        <result column="yeardate" property="yeardate" />
+        <result column="importedCase" property="importedCase" />
+        <result column="localConfirmadd" property="localConfirmadd" />
+        <result column="infect" property="infect" />
+        <result column="localinfectionadd" property="localinfectionadd" />
+        <result column="healRate" property="healRate" />
+        <result column="deadRate" property="deadRate" />
+        <result column="confirm" property="confirm" />
+        <result column="suspect" property="suspect" />
+        <result column="heal" property="heal" />
+        <result column="dead" property="dead" />
+    </resultMap>
+
+</mapper>

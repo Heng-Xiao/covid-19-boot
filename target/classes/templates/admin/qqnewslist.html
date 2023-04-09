@@ -1,0 +1,224 @@
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="/admin/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/admin/css/style.css"/>
+    <link href="/admin/assets/css/codemirror.css" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="/admin/assets/css/font-awesome.min.css"/>
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/admin/assets/css/font-awesome-ie7.min.css"/>
+    <![endif]-->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/admin/assets/css/ace-ie.min.css"/>
+    <![endif]-->
+    <script src="/admin/assets/js/jquery.min.js"></script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <![endif]-->
+
+    <!--[if !IE]> -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='/admin/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='/admin/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+    </script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='/admin/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="/admin/assets/js/bootstrap.min.js"></script>
+    <script src="/admin/assets/js/typeahead-bs2.min.js"></script>
+    <!-- page specific plugin scripts -->
+    <!--    <script src="/admin/assets/js/jquery.dataTables.min.js"></script>-->
+    <!--    <script src="/admin/assets/js/jquery.dataTables.bootstrap.js"></script>-->
+    <script type="text/javascript" src="/admin/js/H-ui.js"></script>
+    <script type="text/javascript" src="/admin/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="/admin/js/list.js"></script>
+    <script src="/admin/assets/layer/layer.js" type="text/javascript"></script>
+    <script src="/admin/assets/laydate/laydate.js" type="text/javascript"></script>
+    <title>用户列表</title>
+</head>
+
+<body>
+<div class="page-content clearfix">
+    <div id="Member_Ratings">
+        <div class="d_Confirm_Order_style">
+            <!---->
+            <div class="table_menu_list">
+                <table class="table table-striped table-bordered table-hover" style="table-layout: fixed;"
+                       id="sample-table">
+                    <thead>
+                    <tr>
+                        <th width="50">ID</th>
+                        <th width="120">发布时间</th>
+                        <th width="390">新闻标题</th>
+                        <th style="width:270px; white-space:nowrap; overflow:hidden;text-overflow: ellipsis;">内容概要</th>
+                        <th width="120">新闻来源</th>
+                        <th width="95">状态</th>
+                        <th width="65">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="page,iterStat : ${pages.records}">
+                        <td th:text="${iterStat.index + 1}">1</td>
+                        <td th:text="${page.publishTime}">张三</td>
+                        <td th:text="${page.title}">admin@mail.com</td>
+                        <td  class="text-l" style="width:270px; white-space:nowrap; overflow:hidden;text-overflow: ellipsis;">
+                            <a th:text="${page.newsUrl}" style="width:250px; white-space:nowrap; overflow:hidden;text-overflow: ellipsis;"
+                               th:href="${page.newsUrl}">.222</a>
+                        <td th:text="${page.srcfrom}">admin@mail.com</td>
+                        <td class="td-manage">
+                            <a href="javascript:ovid()" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>&nbsp;已浏览</a>
+                        </td>
+                        <td class="td-manage">
+                            <a title="删除" href="javascript:;"
+                               th:onclick="member_del_qqnewlist(this,[[${page.publishTime}]],[[${pages.current}]])"
+                               class="btn btn-xs btn-warning"><i class="icon-trash  bigger-120"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="dataTables_info" id="sample-table_info" role="status" aria-live="polite">当前第
+                            [[${pages.current}]] 页 总计 [[${pages.pages}]]
+                            页，共 [[${pages.total}]] 条记录
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="l_f" style="float: right">
+						<a th:href="@{/downloadqq_news}" class="btn btn-success" style="height: 32.5px">导出Excel</a>
+					    </span>
+                        <div class="dataTables_paginate paging_bootstrap" id="sample-table_paginate">
+                            <ul class="pagination">
+                                <li th:if="${pages.current>1}" class="prev"><a
+                                        th:href="@{/qqnewslist.html(pn=${(pages.current)-1})}">←
+                                    前一页</a></li>
+                                <li th:if="${pages.current==1}" class="prev disabled"><a>← 前一页</a>
+                                </li>
+                                <li th:class="${num == pages.current?'active':''}"
+                                    th:each="num:${#numbers.sequence(1,pages.pages)}"
+                                    th:if="${pages.pages<=7}"><a
+                                        th:href="@{/qqnewslist.html(pn=${num})}">[[${num}]]</a></li>
+                                <li th:class="${num == pages.current?'active':''}"
+                                    th:each="num:${#numbers.sequence(1,7)}"
+                                    th:if="${pages.pages>7 && pages.current<4 }"><a
+                                        th:href="@{/qqnewslist.html(pn=${num})}">[[${num}]]</a></li>
+                                <li th:class="${num == pages.current?'active':''}"
+                                    th:each="num:${#numbers.sequence(pages.current -3,pages.current +3)}"
+                                    th:if="${pages.pages>7 && pages.current>=4 && pages.current< (pages.pages)-4 }"><a
+                                        th:href="@{/qqnewslist.html(pn=${num})}">[[${num}]]</a></li>
+
+                                <li th:class="${num == pages.current?'active':''}"
+                                    th:each="num:${#numbers.sequence((pages.pages)-7,pages.pages)}"
+                                    th:if="${pages.pages>7 && pages.current >= (pages.pages)-4}"><a
+                                        th:href="@{/qqnewslist.html(pn=${num})}">[[${num}]]</a></li>
+                                <li th:if="${pages.current<pages.pages}"
+                                    class="next"><a
+                                        th:href="@{/qqnewslist.html(pn=${(pages.current)+1})}">下一页
+                                    → </a></li>
+                                <li th:if="${pages.current==pages.pages}"
+                                    class="next disabled"><a>下一页 →</a></li>
+                                <!--                                <li class="next disabled"><a href="#">下一页</a></li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加风险地区图层-->
+<div class="add_menber" id="add_menber_style" style="display:none">
+
+    <ul class=" page-content">
+        <li>
+            <label class="label_name">城市名称：</label>
+            <span class="add_name" style="width: auto">
+                <input style="width: auto; text-align: center" value="" name="城市名称" type="text" class="text_add"/>
+            </span>
+            <div class="prompt r_f"></div>
+        </li>
+
+        <li><label class="label_name" style="width: auto">每千人卫生技术人员：</label><span class="add_name"><input
+                style="width: auto; text-align: center" name="每千人卫生技术人员" type="text"
+                class="text_add"/></span>
+            <div class="prompt r_f"></div>
+        </li>
+
+        <li><label class="label_name">城镇化率：</label><span class="add_name"><input style="width: auto; text-align: center"
+                                                                                 name="城镇化率" type="text"
+                                                                                 class="text_add"/></span>
+            <div class="prompt r_f"></div>
+        </li>
+
+
+        <li><label class="label_name" style="width: auto; padding-left: 40px">在校学生人数：</label><span
+                class="add_name"><input style="width: auto; text-align: center" name="在校学生人数" type="text"
+                                        class="text_add"/></span>
+            <div class="prompt r_f"></div>
+        </li>
+        <li>
+            <label class="label_name" style="width: auto; padding-left: 29px">G D P：</label><span
+                class="add_name"><input style="width: auto; text-align: center" name="G D P" type="text"
+                                        class="text_add"/></span>
+            <div class="prompt r_f"></div>
+        </li>
+
+
+    </ul>
+</div>
+<div id="Guestbook" style="display: none;" class="layui-layer-wrap">
+    <div class="content_style">
+        <div class="form-group"><label class="col-sm-2 control-label no-padding-right" >发布时间 </label>
+            <div class="col-sm-9" style="margin-top: 5.4px">2022-05-14T09:16:09</div>
+        </div>
+        <div class="form-group"><label class="col-sm-2 control-label no-padding-right" >新闻标题 </label>
+            <div class="col-sm-9" style="margin-top: 5.4px">国家卫健委|昨日本土新增253+1726例</div>
+        </div>
+        <div class="form-group"><label class="col-sm-2 control-label no-padding-right" >新闻来源 </label>
+            <div class="col-sm-9" style="margin-top: 5.4px">央视新闻app</div>
+        </div>
+        <div class="form-group"><label class="col-sm-2 control-label no-padding-right" > 内容详细 </label>
+            <div class="col-sm-9" style="margin-top: 5.4px"></div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    /*留言查看*/
+    function Guestbook_iew(obj){
+        $("#Guestbook").find(".col-sm-9").eq(0).text($(obj).parents("tr").children("td").eq(1).text()) ;
+        $("#Guestbook").find(".col-sm-9").eq(1).text($(obj).parents("tr").children("td").eq(2).text()) ;
+        $("#Guestbook").find(".col-sm-9").eq(2).text($(obj).parents("tr").children("td").eq(4).text()) ;
+        $("#Guestbook").find(".col-sm-9").eq(3).text($(obj).parents("tr").children("td").eq(3).children("a").text()) ;
+
+        var index = layer.open({
+            type: 1,
+            title: '反馈信息',
+            maxmin: true,
+            shadeClose:false,
+            area : ['800px' , ''],
+            content:$('#Guestbook'),
+            btn:['确定','取消'],
+        })
+    };
+</script>
+</body>
+
+
+</html>

@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html
+		PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+	<title>全国疫情风险地区监测平台</title>
+	<link rel="stylesheet" type="text/css" href="/risk/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="/risk/css/scanboard.css" />
+	<link rel="stylesheet" type="text/css" href="/risk/css/animsition.css" />
+	<link rel="stylesheet" type="text/css" href="/risk/css/jquery.shCircleLoader.css" />
+	<script type="text/javascript" src="/risk/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/risk/js/jquery.shCircleLoader-min.js"></script>
+	<!-- 去掉高德地图左下角logo -->
+	<style type="text/css">
+		.amap-logo {
+			display: none;
+			opacity: 0 !important;
+		}
+
+		.amap-copyright {
+			opacity: 0;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="loader"></div>
+
+	<script type="text/javascript">
+		$('#loader').shCircleLoader({ color: "#00deff" });
+	</script>
+
+
+	<!--Top Start!-->
+	<div class="scanboardWp animsition">
+
+		<div id="myMap" class="center" style="width:100%;height: 100%;position: relative;z-index:-1"></div>
+		<!-- <div id="myMap" style="width:100%;height: 100%;position: absolute;position:relative;z-index:-1"></div> -->
+		<div id="" style="position:relative; z-index:10;height: 7%;">
+			<div class="wp clearfix">
+				<div onclick="xianshi(this)" id="xianshi"
+					 style="border-radius: 10px;position:absolute; z-index:10;background-color: rgb(44,61,63);width: 7%;margin-top: 9px">
+					<h1 style="color: rgb(16,223,255);text-align: center;margin-top: 2px;font-size: 18px;">显示部分</h1>
+				</div>
+				<div class="center topLogo"
+					 style="border-radius: 10px;background-color: rgb(44,61,63);position:absolute; z-index:11;margin: auto; position: absolute;top: 0;bottom: 0;left: 0;right: 0;width: 30%;">
+					<h1 style="color: rgb(16,223,255);text-align: center;margin-top: 10px;font-size: 25px;">
+						全国疫情风险地区监测平台</h1>
+				</div>
+			</div>
+		</div>
+		<!--Top End!-->
+<!--		<div id="myMap" class="center" style="width:100%;height: 100%;position: relative;z-index:-1"></div>-->
+
+		<!-- <div id="myMap" class="center" style="width:100%;height: 100%;position: relative;z-index:-1"></div> -->
+		<!--Main Start!-->
+		<div class="left" style="position:absolute; z-index:9;margin-top: 15px;left: 2%;">
+
+			<!--数量统计-->
+			<div class="item basicInfo" id = 'jinggainum' style="background-color: rgb(44,61,63);">
+				<div class="itemTit">
+					<span class="border-green">数量统计</span>
+				</div>
+				<div class="itemCon itembg">
+					<div class="infoPie">
+						<ul class="clearfix">
+							<li class="color-red">
+								<span id="indicator3" total="188743">188743</span>
+								<p>高风险</p>
+							</li>
+							<li class="color-yellow">
+								<span id="indicator1" total="72243">72243</span>
+								<p>中风险</p>
+							</li>
+							<li class="color-green">
+								<span id="indicator2" total="43">43</span>
+								<p>低风险</p>
+							</li>
+						</ul>
+						<div id="indicatorContainer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="right" id = "tianqi" style="position:absolute; z-index:10;right: 2%;margin-top: 15px;">
+			<!--天气预报-->
+			<div class="item total itembg" style="background-color: rgb(44,61,63);">
+				<div class="itemTit">
+					<span class="border-yellow">天气预报</span>
+				</div>
+				<div class="itemCon">
+					<table border="0" cellspacing="" cellpadding="">
+						<tr>
+							<th>
+								<div class="bigbox">
+									<img id="weatherImg" src="#	" alt="">
+								</div>
+							</th>
+							<th>
+								<div id="weather" style="float: left;">
+									<p id="tiqnqi" class="active" style="color: rgb(16,223,255);"></p>
+									<p id="wendu" style="color: rgb(16,223,255);"></p>
+									<p id="diqu" style="color: rgb(16,223,255);"></p>
+								</div>
+							</th>
+							<th style="width: 2.19rem;height: 0.65rem;border-right: 2.2px solid rgb(16,223,255);">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</th>
+							<th>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</th>
+							<th>
+								<div class="data">
+									<p class="time" id="time"
+										style="font-size: 2rem;height: 0.42rem;line-height: 0.42rem; color: rgb(16,223,255);height: 1.8rem;">
+										21:05:45</p>
+
+									<p id="date">
+
+										<span style="color: rgb(16,223,255);">2022/7/1</span>
+										&nbsp;&nbsp;
+
+										<span style="color: rgb(16,223,255);">周3</span>
+									</p>
+								</div>
+
+							</th>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<!--新闻列表-->
+			<div id='shebeiliebiao' class="item billState"
+				style="background-color: rgb(44,61,63);height: 490px;">
+				<div class="itemTit">
+					<span class="border-green">新闻列表</span>
+				</div>
+				<div class="itemCon">
+					<div class="StateBox">
+						<div id="FontScroll" style="height: 440px;">
+							<ul id = "newList">
+								<li style="padding-bottom: 10px;">
+									<a href="http://view.inews.qq.com/a/20220726A0B2M500">
+
+										<div class="fontInner clearfix">
+											<img referrerPolicy="no-referrer" style=" float: left;padding-right: 20px;" src="http://inews.gtimg.com/newsapp_ls/0/15122074489_150120/0"
+												height="60" width="60" alt="">
+											<dl style="float: left;">
+												<dd>
+													<p style="color: rgb(16,223,255);white-space: nowrap;width: 244px;text-overflow:ellipsis;overflow:hidden ;">标题: 定西市这些市场主体疫情防控责任落实不到位，曝光！（第九期）</p>
+													<p style="color: rgb(16,223,255);">时间: 2022-07-26 21:18:48</p>
+													<p class="dizhi"
+														style="color: rgb(16,223,255);  white-space: nowrap;width: 244px;text-overflow:ellipsis;overflow:hidden ;">
+														来源: 定西市场监管
+													</p>
+												</dd>
+											</dl>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--Main End!-->
+
+	</div>
+
+	<div class="filterbg"></div>
+
+	<canvas id="canvas" style="position: absolute;top: 0;left: 0;"></canvas>
+</body>
+<script type="text/javascript" src="/risk/js/bg.js"></script>
+<script type="text/javascript" src="/risk/js/scanboard.js"></script>
+<script type="text/javascript" src="/risk/js/fontscroll1.js"></script>
+<script type="text/javascript" src="/risk/js/jquery.animsition.js"></script>
+<script type="text/javascript" src="/risk/js/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="/risk/js/echarts.min.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=c10c592ea8256ce26a026ddd68de62c1"></script>
+<script src="https://pv.sohu.com/cityjson?ie=utf-8" type="text/javascript"></script>
+<script type="text/javascript" src="/risk/js/getdata.js"></script>
+<script language="javascript" type="text/javascript">
+	$.ajax({
+		url: "/qq-news/list",
+		type: "GET",
+		dataType: 'json',
+		error: function () {
+			alert('网络错误');
+		},
+		success: function (res) {
+			console.log(res)
+			$.each(res,function(index,item){
+				$("#newList").append('<li style="padding-bottom: 10px;">'
+						+' 									<a href='+ item.newsUrl+'>'
+						+' '
+						+' 										<div class="fontInner clearfix">'
+						+' 											<img referrerPolicy="no-referrer" style=" float: left;padding-right: 20px;" src='+ item.shortcut+''
+						+' 												height="60" width="60" alt="">'
+						+' 											<dl style="float: left;">'
+						+' 												<dd>'
+						+' 													<p style="color: rgb(16,223,255);white-space: nowrap;width: 244px;text-overflow:ellipsis;overflow:hidden ;">标题: '+item.title+'</p>'
+						+' 													<p style="color: rgb(16,223,255);">时间: '+item.publishTime+'</p>'
+						+' 													<p class="dizhi"'
+						+' 														style="color: rgb(16,223,255);  white-space: nowrap;width: 244px;text-overflow:ellipsis;overflow:hidden ;">'
+						+' 														来源: '+ item.srcfrom+''
+						+' 													</p>'
+						+' 												</dd>'
+						+' 											</dl>'
+						+' 										</div>'
+						+' 									</a>'
+						+' 								</li>');
+			});
+
+
+
+		}
+	});
+
+
+</script>
+
+<script>
+	var demo = null;
+	$(function () {
+		/**
+		 * 初始化FontScroll
+		 * @target 选择器，选择滚动区域ul外层的div
+		 * @options 参数：
+		 * 		time：每次滚动的时间间隔(单位：毫秒)，默认3000
+		 * 		speed：滚动动画时间(单位：毫秒)，数值越小滚动动画速度越快，默认500
+		 * 		rowClass：滚动选中行的样式，默认：fontColor
+		 * 		num：滚动选中的行序号，默认：0 表示第一行
+		 * 		skip：滚动时上面留白显示的行数，默认0
+		 * 		pauseOnHover：鼠标经过时是否暂停，默认：true
+		 *		startOnInit：初始化后是否自动运行，默认：true
+		 * 		init: 是否默认初始化，默认true。默认初始化会给开始行添加rowClass。
+		 */
+		demo = new FontScroll('#FontScroll', {
+			time: 1000,//每次滚动的时间间隔(单位：毫秒)，默认3000
+			speed: 500,//滚动动画时间(单位：毫秒)，数值越小滚动动画速度越快，默认500
+			rowClass: 'fontColor',//滚动选中行的样式，默认：fontColor
+
+			// init: false,
+		});
+	});
+	function shebeiinfo(obj) {
+		demo.pause();
+
+		$('#shebeiinfo').find('p').eq(0).html($(obj).find('p').eq(0).html());
+		$('#shebeiinfo').find('p').eq(1).html($(obj).find('p').eq(1).html());
+		$('#shebeiinfo').find('p').eq(2).html($(obj).find('p').eq(2).html());
+		$('#shebeiinfo').find('img').attr('src', $(obj).find('img').attr('src'));
+		$('#shebeiinfo').find('p').eq(2).attr('title', $(obj).find('p').eq(2).html());
+
+		$('.filterbg').show();
+		$('.carInfo').show();
+		$('.carInfo').height('5px');
+		$('.carInfo').animate({ width: '52%' }, 400, function () {
+			$('.carInfo').animate({ height: '76%' }, 400);
+		});
+		setTimeout(function () {
+			$('.infoBox').show();
+			$('.carClose').css('display', 'block');
+		}, 800);
+	}
+
+
+	$('.carClose').on('click', function () {
+
+		$('.carClose').css('display', 'none');
+		$('.infoBox').hide();
+
+
+		$('.carInfo').animate({ height: '5px' }, 400, function () {
+			$('.carInfo').animate({ width: 0 }, 400);
+		});
+
+		setTimeout(function () {
+			$('.filterbg').hide();
+			$('.carInfo').hide();
+			$('.carInfo').width(0);
+		}, 800);
+		demo.start();
+	});
+
+
+	function xianshi(obj) {
+		$(obj).find('h1').html()
+		if ($(obj).find('h1').html() == '显示全部') {
+			demo.start();
+			$("#shebeiliebiao").css('display', 'block');
+			$("#jinggainum").css('display', 'block');
+			$("#tianqi").css('display', 'block');
+			$(obj).find('h1').html('显示部分');
+		} else if ($(obj).find('h1').html() == '显示部分') {
+			demo.pause();
+			$("#shebeiliebiao").css('display', 'none');
+			$("#jinggainum").css('display', 'none');
+			$("#tianqi").css('display', 'none');
+			$(obj).find('h1').html('显示全部');
+		}
+
+	}
+
+</script>
+
+</html>

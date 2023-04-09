@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="/admin/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/admin/css/style.css"/>
+    <link rel="stylesheet" href="/admin/assets/css/font-awesome.min.css"/>
+    <link href="/admin/assets/css/codemirror.css" rel="stylesheet">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/admin/assets/css/font-awesome-ie7.min.css"/>
+    <![endif]-->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/admin/assets/css/ace-ie.min.css"/>
+    <![endif]-->
+    <script src="/admin/assets/js/ace-extra.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/admin/assets/js/html5shiv.js"></script>
+    <script src="/admin/assets/js/respond.min.js"></script>
+    <![endif]-->
+    <!--[if !IE]> -->
+    <script src="/admin/assets/js/jquery.min.js"></script>
+    <!-- <![endif]-->
+
+    <script src="/admin/assets/js/bootstrap.min.js"></script>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script type="text/javascript" src="/admin/js/list.js"></script>
+
+    <script src="/admin/assets/layer/layer.js" type="text/javascript"></script>
+    <script src="/admin/assets/laydate/laydate.js" type="text/javascript"></script>
+    <script src="/admin/assets/dist/echarts.js"></script>
+
+
+    <title>无标题文档</title>
+</head>
+
+<body>
+<div class="page-content clearfix">
+    <div class="alert alert-block alert-success">
+        <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+        <i class="icon-ok green"></i>欢迎使用<strong class="green">疫情数据后台管理系统<small></small>
+    </strong><span>,你本次登陆时间为</span><span id="time">2016年7月12日13时34分</span><span>，登陆IP:</span><span
+            id="ip">192.168.1.110</span>
+
+        <strong class="green" style="font-size: 15px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击下载获取所有疫情数据<small></small>
+            <span >
+				<a th:href="@{/downloadAlldata}" class="btn btn-success" style="padding: 2px 5px;font-size: 15px">下载</a>
+			</span>
+        </strong>
+
+
+    </div>
+    <div class="state-overview clearfix">
+        <div class="col-lg-3 col-sm-6">
+            <section class="panel">
+                <a href="#" title="累计确诊人数">
+                    <div class="symbol terques">
+                        <i class="icon-bar-chart"></i>
+                    </div>
+                    <div class="value">
+                        <h1 th:text="${chinaTotal.confirm}">34522</h1>
+                        <p>累计确诊人数</p>
+                    </div>
+                </a>
+            </section>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <section class="panel">
+                <div class="symbol red">
+                    <i class="icon-bar-chart"></i>
+                </div>
+                <div class="value">
+                    <h1 th:text="${chinaTotal.nowConfirm}">140</h1>
+                    <p>现存确诊人数</p>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <section class="panel">
+                <div class="symbol yellow">
+                    <i class="icon-bar-chart"></i>
+                </div>
+                <div class="value">
+                    <h1 th:text="${chinaTotal.importedCase}">345</h1>
+                    <p>境外输入人数</p>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <section class="panel">
+                <div class="symbol blue">
+                    <i class="icon-bar-chart"></i>
+                </div>
+                <div class="value">
+                    <h1 th:text="${chinaTotal.dead}">34,500</h1>
+                    <p>累计死亡人数</p>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!--实时交易记录-->
+    <div class="clearfix">
+        <div class="t_Record">
+            <div id="main" style="height:300px; overflow:hidden; width:100%; overflow:auto"></div>
+        </div>
+        <div class="news_style">
+            <div class="title_name">最新消息</div>
+            <ul class="list" th:each="news,iterStat : ${newsList}">
+<!--                <li style="width:240px; white-space:nowrap; overflow:hidden;text-overflow: ellipsis;">-->
+<!--                    <i class="icon-bell red"></i>-->
+<!--                    <a th:text="${news.publishTime}" style="display: none"></a>-->
+<!--                    <a th:text="${news.newsTitle}" style="display: none"></a>-->
+
+<!--                    <a th:text="${news.newsSummary}" style="width:240px; white-space:nowrap; overflow:hidden;text-overflow: ellipsis;"-->
+<!--                                                     href="javascript:;"-->
+<!--                                                     onclick="Guestbook_iew(this)">后台系统找那个是开通了。-->
+<!--                    </a>-->
+<!--                    <a th:text="${news.newsSource}" style="display: none"></a>-->
+<!--                </li>-->
+                <li style="width:240px; white-space:nowrap; overflow:hidden;text-overflow: ellipsis;">
+                    <i class="icon-bell red"></i>
+
+
+                    <a th:text="${news.title}" style="width:240px; white-space:nowrap; overflow:hidden;text-overflow: ellipsis;"
+                       th:href="${news.newsUrl}"
+                       >后台系统找那个是开通了。
+                    </a>
+
+                </li>
+            </ul>
+            <span style="padding-left: 75%"><a th:href="@{/qqnewslist.html}">查看更多...</a></span>
+        </div>
+    </div>
+
+
+
+</div>
+<div id="Guestbook" style="display: none;" class="layui-layer-wrap">
+    <div class="content_style">
+        <div class="form-group"><label class="col-sm-2 control-label no-padding-right" >发布时间 </label>
+            <div class="col-sm-9" style="margin-top: 5.4px">2022-05-14T09:16:09</div>
+        </div>
+        <div class="form-group"><label class="col-sm-2 control-label no-padding-right" >新闻标题 </label>
+            <div class="col-sm-9" style="margin-top: 5.4px">国家卫健委|昨日本土新增253+1726例</div>
+        </div>
+        <div class="form-group"><label class="col-sm-2 control-label no-padding-right" >新闻来源 </label>
+            <div class="col-sm-9" style="margin-top: 5.4px">央视新闻app</div>
+        </div>
+        <div class="form-group"><label class="col-sm-2 control-label no-padding-right" > 内容详细 </label>
+            <div class="col-sm-9" style="margin-top: 5.4px"></div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+
+    /*留言查看*/
+    function Guestbook_iew(obj){
+        $("#Guestbook").find(".col-sm-9").eq(0).text($(obj).parents("li").children("a").eq(0).text()) ;
+        $("#Guestbook").find(".col-sm-9").eq(1).text($(obj).parents("li").children("a").eq(1).text()) ;
+        $("#Guestbook").find(".col-sm-9").eq(2).text($(obj).parents("li").children("a").eq(3).text()) ;
+        $("#Guestbook").find(".col-sm-9").eq(3).text($(obj).parents("li").children("a").eq(2).text()) ;
+
+        var index = layer.open({
+            type: 1,
+            title: '新闻信息',
+            maxmin: true,
+            shadeClose:false,
+            area : ['800px' , ''],
+            content:$('#Guestbook'),
+            btn:['确定','取消'],
+        })
+    };
+
+    //时间设置
+    function currentTime() {
+        var d = new Date(), str = '';
+        str += d.getFullYear() + '年';
+        str += d.getMonth() + 1 + '月';
+        str += d.getDate() + '日';
+        str += d.getHours() + '时';
+        str += d.getMinutes() + '分';
+        str += d.getSeconds() + '秒';
+        return str;
+    }
+
+    //setInterval(function(){$('#time').html(currentTime)},1000);
+
+    function getIp() {
+        var ip = returnCitySN['cip'];
+        $('#ip').html(ip)
+        $('#time').html(currentTime)
+
+    }
+
+    window.onload = getIp;
+
+    $(document).ready(function () {
+
+        $(".t_Record").width($(window).width() - 320);
+        //当文档窗口发生改变时 触发
+        $(window).resize(function () {
+            $(".t_Record").width($(window).width() - 320);
+        });
+    });
+
+    function getChinaTwoMonthsData() {
+        var yeardate = [];
+        var confirm = [];
+        var dead = [];
+        var heal = [];
+        var nowConfirm = [];
+        var chinaTwoMonthsData = {};
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/china-twomonths/list",
+            async: false,
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                // console.log(data);
+                for (var i = 0; i <= data.length - 1; i++) {
+                    yeardate.push(data[i].yeardate.substring(0, 10));
+                    confirm.push(data[i]["confirm"]);
+                    dead.push(data[i].dead);
+                    heal.push(data[i].heal);
+                    nowConfirm.push(data[i].nowConfirm);
+                }
+                chinaTwoMonthsData["yeardate"] = yeardate;
+                chinaTwoMonthsData["confirm"] = confirm;
+                chinaTwoMonthsData["dead"] = dead;
+                chinaTwoMonthsData["heal"] = heal;
+                chinaTwoMonthsData["nowConfirm"] = nowConfirm;
+                // console.log(chinaTwoMonthsData);
+
+            },
+            error: function (e) {
+
+            }
+        });
+        return chinaTwoMonthsData;
+    }
+
+    chinaTwoMonthsData = getChinaTwoMonthsData();
+
+    require.config({
+        paths: {
+            echarts: './admin/assets/dist'
+        }
+    });
+    require(
+        [
+            'echarts',
+            'echarts/theme/macarons',
+            'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+            'echarts/chart/bar'
+        ],
+        function (ec, theme) {
+            var myChart = ec.init(document.getElementById('main'), theme);
+            var yeardate = chinaTwoMonthsData["yeardate"];
+
+            var confirm = chinaTwoMonthsData["confirm"];
+
+            var dead = chinaTwoMonthsData["dead"];
+
+            var heal = chinaTwoMonthsData["heal"];
+
+            var nowConfirm = chinaTwoMonthsData["nowConfirm"];
+            option = {
+                title: {
+                    text: '疫情人数变化曲线记录',
+                    subtext: '实时获取疫情数据信息'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['累计确诊人数', '累计死亡人数', '累计治愈人数', '现存确诊人数']
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        dataView: {show: true, readOnly: false},
+                        magicType: {show: true, type: ['line', 'bar']},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                calculable: true,
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: yeardate
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                series: [
+                    {
+                        name: '累计确诊人数',
+                        type: 'line',
+                        data: confirm,
+
+                    },
+                    {
+                        name: '累计死亡人数',
+                        type: 'line',
+                        data: dead,
+
+
+                    }
+                    , {
+                        name: '累计治愈人数',
+                        type: 'line',
+                        data: heal,
+
+
+                    }
+                    , {
+                        name: '现存确诊人数',
+                        type: 'line',
+                        data: nowConfirm,
+
+
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+        }
+    );
+</script>
+</body>
+</html>

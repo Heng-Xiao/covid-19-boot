@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.covids.mapper.RiskAreasMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiao.covids.entity.RiskAreas">
+        <result column="areas_name" property="areasName" />
+        <result column="areas_degree" property="areasDegree" />
+        <result column="address" property="address" />
+        <result column="geo" property="geo" />
+    </resultMap>
+
+</mapper>

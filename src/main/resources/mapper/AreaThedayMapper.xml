@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.covids.mapper.AreaThedayMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiao.covids.entity.AreaTheday">
+        <result column="area" property="area" />
+        <result column="confirmed" property="confirmed" />
+        <result column="died" property="died" />
+        <result column="crued" property="crued" />
+        <result column="confirmedRelative" property="confirmedRelative" />
+        <result column="curConfirm" property="curConfirm" />
+        <result column="curedRelative" property="curedRelative" />
+        <result column="asymptomaticRelative" property="asymptomaticRelative" />
+        <result column="asymptomatic" property="asymptomatic" />
+        <result column="nativeRelative" property="nativeRelative" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiao.covids.mapper.LoginCountMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiao.covids.entity.LoginCount">
+        <id column="id" property="id" />
+        <result column="loginuser" property="loginuser" />
+        <result column="ip" property="ip" />
+        <result column="address" property="address" />
+        <result column="time" property="time" />
+        <result column="numeric_address" property="numericAddress" />
+        <result column="browser_name" property="browserName" />
+        <result column="os_name" property="osName" />
+    </resultMap>
+
+</mapper>

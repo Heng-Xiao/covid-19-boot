@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+<title>可视化大屏登录</title>
+<link rel="stylesheet" type="text/css" href="/login/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="/login/css/scanboardLogin.css" />
+<link rel="stylesheet" type="text/css" href="/login/css/animsition.css" />
+</head>
+<body>
+	<div class="wp animsition">
+		<div class="boardLogin">
+			<a href="#" class="logo">
+				<img src="/login/images/loginlogo.png">
+			</a>
+			<form name="Form" method="POST" th:action="@{/login}">
+				<div class="inpGroup">
+					<span class="loginIco1"></span>
+					<input type="text" name="name" placeholder="请输入您的用户名" value = 'admin'>
+				</div>
+				<div class="prompt">
+					<p class="error" th:text="${msg}">用户名错误或不存在</p>
+				</div>
+				
+				<div class="inpGroup">
+					<span class="loginIco2"></span>
+					<input type="password" name="password"  value = 'admin' placeholder="请输入您的密码">
+				</div>
+				<div class="prompt">
+					<p class="success" style="display: none">输入正确</p>
+				</div>
+                <button class="submit" >登录</button>
+				<br>
+				<div>
+					<a  th:href="@{/regist}" style="color: #fff3f3;font-size: 13px">去注册？注册账号可不限次登录</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="particles-js"></div>
+</body>
+<script type="text/javascript" src="/login/js/jquery.min.js"></script>
+<script type="text/javascript" src="/login/js/jquery.animsition.js"></script>
+<script src="/login/js/particles.min.js"></script>
+<script src="/login/js/app.js"></script>
+<script type="text/javascript">
+	$(".animsition").animsition({
+	    inClass               :   'fade-in',
+	    outClass              :   'fade-out',
+	    inDuration            :    800,
+	    outDuration           :    1000,
+	    linkElement           :   '.animsition-link',
+
+	    loading               :    false,
+	    loadingParentElement  :   'body',
+	    loadingClass          :   'animsition-loading',
+	    unSupportCss          : [ 'animation-duration',
+	                              '-webkit-animation-duration',
+	                              '-o-animation-duration'
+	                            ],
+	
+
+	    overlay               :   false,
+	    
+	    overlayClass          :   'animsition-overlay-slide',
+	    overlayParentElement  :   'body'
+  	});
+</script>
+</html>
