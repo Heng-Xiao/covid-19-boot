@@ -1,5 +1,6 @@
 package com.xiao.covids.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.xiao.covids.constant.Const;
 import com.xiao.covids.entity.*;
 import com.xiao.covids.service.*;
 import com.xiao.covids.util.IpUtil;
@@ -7,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.util.StringUtils;
+
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -200,7 +201,7 @@ public class IndexController {
             loginCount.setNumericAddress(str[3]);
             //获取ip所在地
             loginCount.setAddress(str[5].substring(0,str[5].indexOf(" ip138提供")));
-            emailService.sendSimpleMail("1730509384@qq.com", "登录国内疫情可视化平台通知", "登录用户："+ name + "<br>"+"登录时间："+ time + "<br>"+ "登录IP："+ip+ "<br>"+ "登录地址：" + str[5].substring(0,str[5].indexOf(" ip138提供")));
+            emailService.sendSimpleMail(Const.EMAIL, "登录国内疫情可视化平台通知", "登录用户："+ name + "<br>"+"登录时间："+ time + "<br>"+ "登录IP："+ip+ "<br>"+ "登录地址：" + str[5].substring(0,str[5].indexOf(" ip138提供")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -269,7 +270,7 @@ public class IndexController {
                 loginCount.setNumericAddress(str[3]);
                 //获取ip所在地
                 loginCount.setAddress(str[5].substring(0,str[5].indexOf(" ip138提供")));
-                emailService.sendSimpleMail("1730509384@qq.com", "登录国内疫情可视化平台通知", "登录用户："+ user.getName() + "<br>"+"登录时间："+ time + "<br>"+ "登录IP："+ip+ "<br>"+ "登录地址：" + str[5].substring(0,str[5].indexOf(" ip138提供")));
+                emailService.sendSimpleMail(Const.EMAIL, "登录国内疫情可视化平台通知", "登录用户："+ user.getName() + "<br>"+"登录时间："+ time + "<br>"+ "登录IP："+ip+ "<br>"+ "登录地址：" + str[5].substring(0,str[5].indexOf(" ip138提供")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
