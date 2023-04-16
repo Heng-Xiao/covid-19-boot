@@ -9,7 +9,7 @@
 
 花有重开日，人无再少年。
 
-大家好，我是一只二二届毕业的蛋蛋后小菜鸟，平时没事就喜欢瞎写，此系统于2022年所写，目前已开源。
+大家好，我是一只二二届毕业的蛋蛋后小菜鸟，平时没事就喜欢瞎写，此系统于2022年所写，目前已开源，可免费学习使用，若分享请注明出处，谢谢。
 
 座右铭：业精于勤，荒于嬉；行成于思，毁于随。
 
@@ -21,14 +21,14 @@
 
 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 国内疫情大数据可视化平台主要是为了更直观地实时关注和掌握新型冠状病毒感染的肺炎疫情防控进展，也更直观地了解全国的疫情情况，及时有效做出防控措施，在数据可视化技术的解决下，数据信息所面向的不仅是决策者，也能向大众进行授权展示，我们可以通过大数据可视化，可以更清楚、更直观地了解到目前疫情全国各地的感染人数，以此了解疫情的变化的趋势。
 
-本系统采用SpringBoot架构开发web应用，使用Echarts绘制基本图表，使用MyBatis-Plus来完成对数据库的操作。
+本系统采用SpringBoot架构开发web应用，使用Echarts绘制基本图表，使用MyBatis-Plus来完成对MySQL数据库的操作。
 
-💡 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 基于SpringBoot的国内疫情可视化平台，目前已开源分享。
+💡 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 基于SpringBoot的国内疫情可视化平台，目前已开源分享，可免费学习使用，若分享请注明出处，谢谢。
 
 
 
-* 🧑‍🤝‍🧑前端采用[Echarts](https://echarts.apache.org/zh/index.html) 、[Jquery](https://jquery.com/)、Ajax、HTML、CSS、。
-* 💡后端采用 Java 语言 [SpringBoot](https://spring.io/projects/spring-boot) 框架、Spring、SpringMVC、[MyBatis-Plus](https://baomidou.com/)。
+* 🧑‍🤝‍🧑前端采用[Echarts](https://echarts.apache.org/zh/index.html) 、[Jquery](https://jquery.com/)、Ajax、HTML、CSS等技术。
+* 💡后端采用 Java 语言 [SpringBoot](https://spring.io/projects/spring-boot) 、[Spring](https://spring.io/projects/spring-framework)、[SpringMVC](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc)、[MyBatis-Plus](https://mybatis.org/mybatis-3/zh/getting-started.html) 等框架技术。
 
 
 
@@ -54,39 +54,49 @@
 
 ## 源码地址
 
-gitee地址(主推)：[https://gitee.com/Heng-Xiao/covid-19-django](https://gitee.com/Heng-Xiao/covid-19-django)👩‍👦‍👦
+gitee地址(主推)：[https://gitee.com/Heng-Xiao/covid-19-boot](https://gitee.com/Heng-Xiao/covid-19-boot)👩‍👦‍👦
 
-github地址：[https://github.com/Heng-Xiao/covid-19-django](https://github.com/Heng-Xiao/covid-19-django)👩‍👦‍👦
+github地址：[https://github.com/Heng-Xiao/covid-19-boot](https://github.com/Heng-Xiao/covid-19-boot)👩‍👦‍👦
 
 
 
 ## 内置功能
 
-1.  👨‍⚕️用户登录：用户登录和注册功能。
-2.  👩‍⚕️数据爬取：数据爬取脚本GetData.py和SaveMysqlData.py，直接将疫情数据爬取到MySQL数据库中。
-3.   :grapes: 数据更新：数据重新爬取并且更新数据。
-4.  👨‍🎓疫情可视化大屏：从MySQL数据库将数据取出并且整理将其用来做数据可视化。
-
+1.  👨‍⚕️用户登录注册功能：用户登录和邮箱验证码注册功能，登录发送邮箱通知功能。
+2.  👨‍🎓可视化大屏展示：国内疫情大数据可视化平台和全国风险地区监测平台。
+3.  👨‍🎓疫情数据后台管理：国内疫情数据管理、省份疫情数据管理、疫情新闻数据管理、风险地区数据管理、用户管理等等。
+4.  👨‍⚕️定时任务疫情数据爬虫功能：使用crontab定时任务运行python脚本来进行疫情数据的爬取并且将其存储进入MySQL数据库中。
 
 
 ## 详细结构
 
 ```
-- covids19 项目名字
-    - connect.py 数据库配置相关
-    - GetData.py Python数据爬虫相关
-    - indexdata.py 数据封装相关
-    - SaveMysqlData.py 将爬取的数据保存到MySQL数据库
-    - settings.py 很重要，整个项目的启动，由配置文件决定
-    - urls.py 路由（总路由）
-    - views.py 视图函数（重点）
-    - wsgi.py wsgi服务器的配置
-- static 静态资源存放路径
-- templates 模板文件（一个一个的html），pycharm创建出来才有这个文件夹
-- venv 项目虚拟环境管理
-- covid-19.sql 数据库里面的数据表
-- manage.py 启动项目，创建app，各种命令的操作
-- requirements.txt 项目运行需要的依赖
+- src 
+    - main 
+        - java
+            - com.xiao.covids
+                - config
+                - constant
+                - controller
+                - entity
+                - generator
+                - interceptor
+                - mapper    
+                - service
+                - util
+                - CovidsApplication.java
+        - resources
+            - mapper
+            - static
+            - templates
+            - application.properties
+    - test
+         - java
+            - com.xiao.covids
+                - CovidsApplicationTests.java
+- target
+- covid.sql
+- pom.xml
 ```
 
 
