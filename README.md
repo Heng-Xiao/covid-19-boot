@@ -1,6 +1,6 @@
 # COVID-19-Boot
 
-[![img](https://img.shields.io/badge/python-%3E=3.8.x-green.svg)](https://python.org/)  [![PyPI - Django Version badge](https://img.shields.io/badge/django%20versions-4.1-blue)](https://docs.djangoproject.com/zh-hans/4.1/) [![img](https://img.shields.io/badge/Echats-%3E%3D%204.2.1-brightgreen)](https://echarts.apache.org/zh/index.html)
+[![img](https://img.shields.io/badge/SpringBoot-%3E=2.3.7-green.svg)](https://spring.io/projects/spring-boot)  [![PyPI - Django Version badge](https://img.shields.io/badge/django%20versions-4.1-blue)](https://docs.djangoproject.com/zh-hans/4.1/) [![img](https://img.shields.io/badge/Echats-%3E%3D%204.2.1-brightgreen)](https://echarts.apache.org/zh/index.html)
 
 [English](./README.en.md) | [预 览](http://www.henglulu.top) | [群聊](https://jq.qq.com/?_wv=1027&k=sLyuUZHU) | [Gitee](https://gitee.com/Heng-Xiao/covid-19-boot) | [Github](https://github.com/Heng-Xiao/covid-19-boot) 
 
@@ -21,7 +21,7 @@
 
 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 国内疫情大数据可视化平台主要是为了更直观地实时关注和掌握新型冠状病毒感染的肺炎疫情防控进展，也更直观地了解全国的疫情情况，及时有效做出防控措施，在数据可视化技术的解决下，数据信息所面向的不仅是决策者，也能向大众进行授权展示，我们可以通过大数据可视化，可以更清楚、更直观地了解到目前疫情全国各地的感染人数，以此了解疫情的变化的趋势。
 
-本系统采用SpringBoot架构开发web应用，使用[Echarts](https://echarts.apache.org/zh/index.html)绘制基本图表，使用[MyBatis-Plus](https://mybatis.org/mybatis-3/zh/getting-started.html) 来完成对MySQL数据库的操作。
+本系统采用[SpringBoot](https://spring.io/projects/spring-boot)架构开发web应用，使用[Echarts](https://echarts.apache.org/zh/index.html)绘制基本图表，使用[MyBatis-Plus](https://mybatis.org/mybatis-3/zh/getting-started.html) 来完成对MySQL数据库的操作。
 
 💡 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 基于[SpringBoot](https://spring.io/projects/spring-boot)的国内疫情可视化平台，目前已开源分享，可免费学习使用，若分享请注明出处，谢谢。
 
@@ -74,7 +74,7 @@ github地址：[https://github.com/Heng-Xiao/covid-19-boot](https://github.com/H
 - src 
     - main 
         - java
-            - com.xiao.covids
+            - com.xiao.covids java代码存放路径
                 - config 配置类存放包
                 - constant 常量类存放包
                 - controller 控制层
@@ -85,7 +85,7 @@ github地址：[https://github.com/Heng-Xiao/covid-19-boot](https://github.com/H
                 - service service层
                 - util 工具类
                 - CovidsApplication.java 启动类
-        - resources
+        - resources 页面和资源存放路径
             - mapper mapper映射文件
             - static 静态资源
             - templates 页面
@@ -113,44 +113,32 @@ Maven >= 3.5.2(推荐3.5+版本)
 ## 运行准备♝
 
 ```bash
---1.在MySQL数据库中新建数据库covid-19
+--1.在MySQL数据库中新建数据库covid
 
---2.将covid-19.sql文件中的数据导入到数据库中
+--2.将covid.sql文件中的数据导入到数据库中
 
---3.安装依赖环境
-pip install -r requirements.txt
+--3.加载pom.xml里面的依赖包
 
---4.更换数据库密码
---进入connect.py和settings.py文件修改下
+--4.在application.properties配置文件更换数据库用户名和密码、以及邮箱相关配置信息
+# 配置数据库信息
+spring.datasource.url=jdbc:mysql://localhost:3306/covid?serverTimeZone=Shanghai&?useUnicode=true&characterEncoding=utf8&useSSL=false
+spring.datasource.username=*******
+spring.datasource.password=*******
+#邮件相关配置信息
+spring.mail.host=smtp.163.com
+spring.mail.username=**********@163.com
+spring.mail.password=**********
+spring.mail.protocol=smtp
+spring.mail.port=465
 
---connect.py
-conn = Connect(user="root",
-                   password="000000",
-                   host="127.0.0.1",
-                   database="covid-19",
-                   port=3306,
-                   charset="utf8", )
---settings.py
-DATABASES = {
-    'default':
-    {
-        'ENGINE': 'django.db.backends.mysql',    # 数据库引擎
-        'NAME': 'covid-19', # 数据库名称
-        'HOST': '127.0.0.1', # 数据库地址，本机 ip 地址 127.0.0.1
-        'PORT': 3306, # 端口
-        'USER': 'root',  # 数据库用户名
-        'PASSWORD': '000000', # 数据库密码
-    }
-}
-
---5.启动项目
-python3 manage.py runserver 0.0.0.0:8000
+--5.在Const.java常量类中修改自己的邮箱账号
+public static final String EMAIL = "*********@qq.com";
 ```
 
 
 ### 访问项目
 
-- 访问地址：[http://localhost:8000](http://localhost:8000) (默认为此地址，如有修改请按照配置文件)
+- 访问地址：[http://localhost](http://localhost) (默认此地址为80端口，如有修改请按照配置文件)
 - 账号：`admin` 密码：`admin`
 
 
@@ -179,8 +167,8 @@ python3 manage.py runserver 0.0.0.0:8000
 
 ## 后续打算
 
-1.  👨‍⚕️疫情数据后台管理：用来管理疫情数据信息以及爬虫脚本信息。
-2.  👩‍⚕️加入Redis技术：优化可视化大屏查询数据时间。
+1.  👨‍⚕️疫情数据后台管理：新增爬虫脚本信息。
+2.  👩‍⚕️加入Redis技术：优化可视化大屏查询数据时间以及登录注册发送邮箱验证码时间限制。
 3.  👨‍🎓增加kafka技术：将爬取到的数据写入kafka之后，再去消费数据，无论是将数据清洗之后存入数据库中或者是将数据拿出来进行一些监测。
 
 目前由于本人的时间有限并且新冠疫情已经开放解封了导致数据不再更新维护。这些打算就不再做了，大家要是有兴趣的话可以自己做一下试试看。
