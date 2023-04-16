@@ -2,7 +2,7 @@
 
 [![img](https://img.shields.io/badge/python-%3E=3.8.x-green.svg)](https://python.org/)  [![PyPI - Django Version badge](https://img.shields.io/badge/django%20versions-4.1-blue)](https://docs.djangoproject.com/zh-hans/4.1/) [![img](https://img.shields.io/badge/Echats-%3E%3D%204.2.1-brightgreen)](https://echarts.apache.org/zh/index.html)
 
-[English](./README.en.md) | [预 览](http://www.henglulu.top) | [群聊](https://jq.qq.com/?_wv=1027&k=sLyuUZHU) | [Gitee](https://gitee.com/Heng-Xiao/covid-19-Boot) | [Github](https://github.com/Heng-Xiao/covid-19-Boot) 
+[English](./README.en.md) | [预 览](http://www.henglulu.top) | [群聊](https://jq.qq.com/?_wv=1027&k=sLyuUZHU) | [Gitee](https://gitee.com/Heng-Xiao/covid-19-boot) | [Github](https://github.com/Heng-Xiao/covid-19-boot) 
 
 
 💡 **「关于」**
@@ -21,14 +21,14 @@
 
 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 国内疫情大数据可视化平台主要是为了更直观地实时关注和掌握新型冠状病毒感染的肺炎疫情防控进展，也更直观地了解全国的疫情情况，及时有效做出防控措施，在数据可视化技术的解决下，数据信息所面向的不仅是决策者，也能向大众进行授权展示，我们可以通过大数据可视化，可以更清楚、更直观地了解到目前疫情全国各地的感染人数，以此了解疫情的变化的趋势。
 
-本系统采用Django架构开发web应用，使用Echarts绘制基本图表，利用Python语言中的requests库从一些新闻网站上爬取疫情数据下来清洗然后存储在MySQL中，实现了永久保存数据，以及实时更新数据，不仅方便，而且还能保证数据的安全性。
+本系统采用SpringBoot架构开发web应用，使用Echarts绘制基本图表，使用MyBatis-Plus来完成对数据库的操作。
 
-💡 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 基于Django的国内疫情可视化平台，目前已开源分享。
+💡 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 基于SpringBoot的国内疫情可视化平台，目前已开源分享。
 
 
 
 * 🧑‍🤝‍🧑前端采用[Echarts](https://echarts.apache.org/zh/index.html) 、[Jquery](https://jquery.com/)、Ajax、HTML、CSS、。
-* 💡后端采用 Python 语言 [Django](https://www.djangoproject.com/) 框架。
+* 💡后端采用 Java 语言 [SpringBoot](https://spring.io/projects/spring-boot) 框架、Spring、SpringMVC、[MyBatis-Plus](https://baomidou.com/)。
 
 
 
