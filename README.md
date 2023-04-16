@@ -1,6 +1,6 @@
 # COVID-19-Boot
 
-[![img](https://img.shields.io/badge/SpringBoot-%3E=2.3.7-green.svg)](https://spring.io/projects/spring-boot)  [![PyPI - Django Version badge](https://img.shields.io/badge/django%20versions-4.1-blue)](https://docs.djangoproject.com/zh-hans/4.1/) [![img](https://img.shields.io/badge/Echats-%3E%3D%204.2.1-brightgreen)](https://echarts.apache.org/zh/index.html)
+[![img](https://img.shields.io/badge/SpringBoot-%3E=2.3.7-green.svg)](https://spring.io/projects/spring-boot)  [![MyBatis-Plus Version badge](https://img.shields.io/badge/MyBatis-Plus%20versions-3.3.2-blue)](https://docs.djangoproject.com/zh-hans/4.1/) [![img](https://img.shields.io/badge/Echats-%3E%3D%204.2.1-brightgreen)](https://echarts.apache.org/zh/index.html)
 
 [English](./README.en.md) | [预 览](http://www.henglulu.top) | [群聊](https://jq.qq.com/?_wv=1027&k=sLyuUZHU) | [Gitee](https://gitee.com/Heng-Xiao/covid-19-boot) | [Github](https://github.com/Heng-Xiao/covid-19-boot) 
 
