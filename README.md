@@ -9,7 +9,7 @@
 
 花有重开日，人无再少年。
 
-大家好，我是一只二二届毕业的蛋蛋后小菜鸟，平时没事就喜欢瞎写，此系统于2022年所写，目前已开源，可免费学习使用，若分享请注明出处，谢谢。
+大家好，我是一只二二届毕业的蛋蛋后小菜鸟，平时没事就喜欢瞎写，此系统于2022年所写， **目前已开源，可免费学习使用，若分享请注明出处，谢谢。** 
 
 座右铭：业精于勤，荒于嬉；行成于思，毁于随。
 
@@ -23,7 +23,7 @@
 
 本系统采用[SpringBoot](https://spring.io/projects/spring-boot)架构开发web应用，使用[Echarts](https://echarts.apache.org/zh/index.html)绘制基本图表，使用[MyBatis-Plus](https://mybatis.org/mybatis-3/zh/getting-started.html) 来完成对MySQL数据库的操作。
 
-💡 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 基于[SpringBoot](https://spring.io/projects/spring-boot)的国内疫情可视化平台，目前已开源分享，可免费学习使用，若分享请注明出处，谢谢。
+💡 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 基于[SpringBoot](https://spring.io/projects/spring-boot)的国内疫情可视化平台， **目前已开源分享，可免费学习使用，若分享请注明出处，谢谢。** 
 
 
 
