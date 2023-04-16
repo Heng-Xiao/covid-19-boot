@@ -21,9 +21,9 @@
 
 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 国内疫情大数据可视化平台主要是为了更直观地实时关注和掌握新型冠状病毒感染的肺炎疫情防控进展，也更直观地了解全国的疫情情况，及时有效做出防控措施，在数据可视化技术的解决下，数据信息所面向的不仅是决策者，也能向大众进行授权展示，我们可以通过大数据可视化，可以更清楚、更直观地了解到目前疫情全国各地的感染人数，以此了解疫情的变化的趋势。
 
-本系统采用SpringBoot架构开发web应用，使用Echarts绘制基本图表，使用MyBatis-Plus来完成对MySQL数据库的操作。
+本系统采用SpringBoot架构开发web应用，使用[Echarts](https://echarts.apache.org/zh/index.html)绘制基本图表，使用[MyBatis-Plus](https://mybatis.org/mybatis-3/zh/getting-started.html) 来完成对MySQL数据库的操作。
 
-💡 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 基于SpringBoot的国内疫情可视化平台，目前已开源分享，可免费学习使用，若分享请注明出处，谢谢。
+💡 [COVID-19-Boot](https://gitee.com/Heng-Xiao/covid-19-boot) 基于[SpringBoot](https://spring.io/projects/spring-boot)的国内疫情可视化平台，目前已开源分享，可免费学习使用，若分享请注明出处，谢谢。
 
 
 
@@ -75,38 +75,39 @@ github地址：[https://github.com/Heng-Xiao/covid-19-boot](https://github.com/H
     - main 
         - java
             - com.xiao.covids
-                - config
-                - constant
-                - controller
-                - entity
-                - generator
-                - interceptor
-                - mapper    
-                - service
-                - util
-                - CovidsApplication.java
+                - config 配置类存放包
+                - constant 常量类存放包
+                - controller 控制层
+                - entity 实体类存放包
+                - generator MyBatis-Plus自动生成类
+                - interceptor 拦截器存放包
+                - mapper mapper存放包
+                - service service层
+                - util 工具类
+                - CovidsApplication.java 启动类
         - resources
-            - mapper
-            - static
-            - templates
-            - application.properties
+            - mapper mapper映射文件
+            - static 静态资源
+            - templates 页面
+            - application.properties 系统配置文件
     - test
          - java
             - com.xiao.covids
-                - CovidsApplicationTests.java
-- target
-- covid.sql
-- pom.xml
+                - CovidsApplicationTests.java 测试类
+- target 编译文件
+- covid.sql 数据库表脚本
+- pom.xml maven配置文件
 ```
 
 
 
 ## 准备工作
 ~~~
-Python >= 3.8.0 (推荐3.8+版本)
-Mysql >= 5.7.0 (可选，默认数据库sqlite3，推荐8.0版本)
-PyCharm >= 2021
+jdk >= 1.8 (推荐1.8+版本)
+Mysql >= 5.7.0 (推荐5.7版本)
+Idea >= 2021
 操作系统 (推荐Windows10版本)
+Maven >= 3.5.2(推荐3.5+版本)
 ~~~
 
 ## 运行准备♝
